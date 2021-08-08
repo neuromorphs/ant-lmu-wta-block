@@ -73,6 +73,10 @@ other people can have access to your changes:
 git push
 ```
 
+The first time you do this for a new branch, you will be asked to change the
+command to `git push --set-upstream origin my_feature_name`.  This is just
+to confirm that you want to create that new branch on github as well.
+
 Warning: if you are not used to using `git`, there can be a bit of a learning
 curve.  The instructions above should all work, but it is quite easy to do
 some of the commands wrong and make things very confusing.  There is a reason
