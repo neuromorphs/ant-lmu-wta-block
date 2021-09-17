@@ -1,10 +1,8 @@
 from lmu_wta import LMUWTABlock
 import numpy as np
 import matplotlib.pyplot as plt
-from sklearn.linear_model import LinearRegression
 
-
-def test_sequence(q=10):
+def sequence(q,tolerance):
     N_neurons = 50
     input_sequence_length = 5
     presentation_time = 10000
@@ -49,16 +47,12 @@ def test_sequence(q=10):
     normalized_errors = errors/max_input_value
     squared_errors = np.power(normalized_errors, 2)
 
-    reg = LinearRegression().fit(squared_errors.reshape(-1, 1), thetas)
+    print(squared_errors)
+    print(tolerance)
+    assert(squared_errors < tolerance).all()
+    # return squared_errors
 
-    print(reg.score(squared_errors.reshape(-1, 1), thetas))
-    print(reg.coef_)
-    print(reg.intercept_)
-    # assert(normalized_error < tolerance)
-    return squared_errors
-
-
-for q in range(10):
-    plt.plot(test_sequence(2*q+2), label=2*q+2)
-plt.legend()
-plt.show()
+def test_sequence():
+    c = 0.015/9
+    for q in range(10):
+        sequence(2*q+2,c*np.linspace(0.1,9.1,10))
